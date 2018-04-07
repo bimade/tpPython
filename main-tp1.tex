@@ -1,0 +1,262 @@
+\documentclass[10pt,a4paper]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[french]{babel}
+\usepackage{url}
+\usepackage{hyperref}
+\usepackage[T1]{fontenc}
+\usepackage{todonotes}
+\newcounter{numerotodo}
+\newcommand{\TODO}[1]{\refstepcounter{numerotodo}\todo[inline]{\thenumerotodo) #1}}
+\usepackage{geometry}
+ \geometry{
+      a4paper,
+       total={170mm,257mm},
+        left=20mm,
+         top=20mm,
+          }
+
+\usepackage{xcolor}
+\usepackage{listings}
+\usepackage{tcolorbox}
+\tcbuselibrary{listings,skins}
+\lstdefinestyle{mystyle}{
+     basicstyle=\ttfamily\color{white},
+     language=python,
+     tabsize=1,
+     keywordstyle=\color{blue},
+     showstringspaces=false,
+     morekeywords={mount}
+ }
+\newtcblisting{mylisting}{
+      enhanced,                             %%% needed for shadow
+      arc=2mm,
+      top=0mm,
+      bottom=0mm,
+      left=0mm,
+      right=0mm,
+      boxrule=0pt,
+      colback=black,
+      %shadow={5mm}{-3mm}{0mm}{fill=black!50!white,opacity=0.5},             %%% here for shadow  and adjust as you like
+      listing only,
+      listing options={style=mystyle},
+      hbox
+}
+\newtcblisting{python}{
+      colback=black,
+      listing only,
+      listing options={style=mystyle},
+}        
+\begin{document}
+\begin{center}
+\huge{TP 5 : Python 3, les bases}
+\end{center}
+=============================================================
+\section{introduction}
+Python, développé depuis 1989 par Guido van Rossum et de nombreux contributeurs bénévoles, est un langage à typage dynamique (i.e. le type des objets manipulés n'est pas forcément connu à l'avance mais est défini à partir de la valeur de la variable) et fortement typé (i.e. qu'il garantit que les types de données employés décrivent correctement les données manipulées). Il est doté d'une gestion automatique de la mémoire par ramasse-miettes (pas de gestion de pointeurs!!!) et d'un système de gestion d'exceptions.
+
+En Python : tout est objet.
+
+Le langage Python peut être interprété (interprétation du bytecode compilé) ou traduit en bytecode, qui est ensuite interprété par une machine virtuelle Python. Il est interfaçable avec des langages comme le C, le C++ ou Java.
+
+Il est possible de programmer en Python en ligne de commande, c'est-à-dire en saisissant et en exécutant les
+instructions les unes à la suite des autres. Ceci se fait via un interpréteur de commandes. Il est également possible de saisir toutes les instructions d'un programme dans un fichier et d'exécuter ce programme
+
+\TODO{Taper dans le terminal la commande : python3 }
+
+l'interpréteur python est lancé à la version 3.5. Si par contre vous taper python, vous aurez la version 2.7 de python.
+
+\section{Premiers pas en Python}
+
+Cette section présente quelques exemples de code Python, réalisés avec Python 3.4 en ligne de commande.
+
+Les lignes commençant par >>> correspondent aux instructions. Les lignes situées juste en dessous correspondent à l'affichage après exécution de l'instruction (i.e. après avoir tapé <Enter>).
+
+En Python, les commentaires commencent par le symbole \#.
+
+Vous êtes invités à taper les exemples ci-dessous pour vous entaîner et à répondre à chaque question associée aux exemples.
+
+\subsection{Faire des calculs avec Python}
+
+\TODO{Essayez, en les exécutant, de comprendre ce que fait chaque instruction (non commentée) de l'exemple ci-dessous.
+
+Cet exemple est valable en ligne de commande uniquement.}
+
+\begin{python}
+>>> 5+3
+8
+>>>5*3
+15
+>>>5**3
+125
+>>> x=1 # declaration d'une variable x de valeur 1 (# pour le commentaire)
+>>> x # affichage de x
+1
+>>> a,b,c=3,5,7 # declaration de 3 variables a, b et c de valeurs 
+resp. 3, 5 et 7
+>>> a-b/c
+2.2857142857142856
+>>> (a-b)/c
+-0.2857142857142857
+>>> b/c
+0.7142857142857143
+\end{python}
+\begin{python}
+>>> b//c
+0
+>>> b%c
+5
+>>> d=1.1
+>>> d/c
+0.15714285714285717
+>>> d//c
+0.0
+\end{python}
+\TODO{Importation de la librairie mathématique et exemple de fonction mathématique avec un import}
+\begin{python}
+>>> from math import * # Pour importer la librairie de fonctions mathematiques
+>>> sqrt(4) # Pour calculer la racine carree
+2.0
+>>>pi
+3.141592653589793
+\end{python}
+
+NB: La liste des fonctions de la librairie math est disponible à l'adresse :
+\url{http://docs.python.org/library/math.html?highlight=math#math}
+
+\subsection{affichage}
+\TODO{Utilisation de la fonction d'affichage print()}
+
+\begin{python}
+>>> print(a+b) # a et b sont les variable de l'exercice 1
+8
+>>> print('la valeur de', a,'+',b,'est :', a+b)
+la valeur de 3 + 5 est 8
+\end{python}
+
+\subsection{Déclaration et initialisation de variables et types}
+
+Python donne dynamiquement des type au variable suivant la valeur associée.
+
+\TODO{Tester ce qui suit}
+\begin{python}
+>>> print(type(a)) # a est la variable de l'exercice 1
+<class 'int'>
+>>> pi=3,14
+>>> print(type(pi))
+<class 'tuple'>
+>>> pi=3.14
+>>> print(type(pi))
+<class 'float'>
+>>> s='exemple de chaine de caracteres'
+>>> type(s)
+<class 'str'>
+>>> 2+'1.5'
+Traceback (most recent call last):
+File "<console>", line 1, in <module>
+TypeError: unsupported operand type(s) for +: 'int' and 'str'
+>>> 2+eval('1.5') # Pour \'eliminer l'erreur pr\'ec\'edente
+3.5
+\end{python}
+
+\subsection{Chaînes de caractères}
+
+\TODO{Manipulation des chaîne de caractères et exemples de fonctions sur les chaînes de caractères}
+
+\begin{python}
+>>> s='un exemple de chaine'
+>>> s2="un autre exemple"
+>>> s[1] # Acces au caractere d'indice 1 (les indices commencent a zero)
+'n'
+>>> print(s[0],s2[0])
+u u
+>>> print(s[4],s2[0])
+x u
+>>> print(s + ' et ' + s2) # Concatenation de chaines
+un exemple de chaine et un autre exemple
+>>> s3=s + ' et ' + s2
+>>> s3
+'un exemple de chaine et un autre exemple'
+>>> s2*2
+'un autre exempleun autre exemple'
+>>> print('La taille de s est :', len(s))
+La taille de s est : 20
+>>> s3[0:3] # Recuperation des caracteres de position entre les 0 et 3e
+'un '
+>>> s3[4:8]
+'xemp'
+>>> print(s3[:3]) # Recuperation des 3 premiers caracteres
+un
+>>> print(s3[3:]) # Recuperation des caracteres a partir de la position 3
+exemple de chaine et un autre exemple
+>>> s3[::-1]
+'elpmexe ertua nu te eniahc ed elpmexe nu'
+>>> s3.find("exemple")
+3
+>>> s3.replace("chaine","str")
+'un exemple de str et un autre exemple'
+>>> help(str) # pour afficher l'aide sur la classe str
+\end{python}
+
+\TODO{Exemple de récupération des mots d'une chaine de caractères}
+\begin{python}
+>>> sentence = 'It is raining cats and dogs'
+>>> words = sentence.split()
+>>> print(words)
+['It', 'is', 'raining', 'cats', 'and', 'dogs']
+\end{python}
+
+\subsection{Boucles et conditions}
+
+A partir d'ici, vous pouvez commencer à saisir les instructions dans un fichier d'extension .py et vous pouvez
+exécuter ce fichier.
+
+Attention : En Python il n'y a pas, comme dans certains langages, d'accolade ouvrante ou fermante pour délimiter
+un bloc d'instructions. Les blocs d'instructions en python sont délimités par ":" puis des tabulations : toutes les
+instructions consécutives à un ":" et débutant par un même nombre de tabulations appartiennent à un même bloc
+d'instructions.
+
+\TODO{Boucle for : Tapez le code suivant et observez le résultat}
+
+\begin{python}
+for i in range(10): # Ne pas oublier les deux points!!
+      x = 2 # Attention ne pas oublier une tab. en debut de ligne sinon erreur!!!
+      print(x*i) # Ne pas oublier la tabulation en debut de ligne!!
+# Tapez encore une fois <Enter> si vous etes en ligne de commande
+\end{python}
+
+\TODO{Boucle while : Tapez le code suivant et observez le résultat.}
+\begin{python}
+a=0
+while(a<12): # Ne pas oublier les deux points!!
+      a=a+1 # Ne pas oublier la tabulation en debut de ligne!!
+      print(a, a**2,a**3) # Ne pas oublier tab en debut de ligne!!
+# Tapez encore une fois <Enter> si vous etes en ligne de commande
+\end{python}
+
+\TODO{Condition If/Then/Else : Tapez le code suivant et observez le résultat.}
+\begin{python}
+a=0
+if a==0: # Ne pas oublier les deux points!!
+      print('0') # Ne pas oublier la tabulation en debut de ligne!!
+elif a==1: # Ne pas mettre de tabulation et ne pas oublier les deux points!!
+      print('1') # Ne pas oublier la tabulation en debut de ligne!!
+else: # Ne pas mettre de tabulation et ne pas oublier les deux points!!
+      print('2') # Ne pas oublier la tabulation en debut de ligne!!
+# Tapez encore une fois <Enter> si vous etes en ligne de commande
+\end{python}
+
+\section*{A propos du TP}
+Imad Eddine BOUSBAA (ibousbaa@usthb.dz), année 2018;
+
+Les sources de ce TP sont sur le dépot :
+
+  \begin{center}\url{github.com/bimade/tpBash}\end{center}
+
+  ce TP \emph{est} sous licence
+  \href{http://creativecommons.org/licenses/by-nc-sa/4.0/}
+  {Attribution-NonCommercial-ShareAlike 4.0 International (CC BY-NC-SA 4.0) }
+
+
+
+
+\end{document}
