@@ -1,2 +1,2 @@
-# tpBash
-TP Bash
+# tpPython
+TP python
